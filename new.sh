@@ -5,8 +5,10 @@ day=$1
 challenge_dir="day${1}"
 
 mkdir $challenge_dir
-cp __template.py "${challenge_dir}/${day}.py"
-cd $challenge_dir
-chmod 755 "${day}.py"
+./get_input.py $day
+mv "in" "${challenge_dir}/in"
 
-touch "in" 
+cp __template.py "${challenge_dir}/a.py"
+cd $challenge_dir
+chmod 755 a.py
+

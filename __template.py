@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
-import sys
+from sys import argv
 
-filename=sys.argv[1]
 
-with open(filename) as fp:
-	for index, line in enumerate(fp):
-		line = line.strip()
-		print(line)
+with open(argv[1]) as fp:
+	for i, l in enumerate(fp):
+		l=l.strip()
+		print(l)

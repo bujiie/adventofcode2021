@@ -4,16 +4,14 @@ import sys
 
 filename=sys.argv[1]
 
-D=[]
+p=None
+i=0
 with open(filename) as fp:
 	for index, line in enumerate(fp):
-		D.append(int(line.strip()))
+		n=int(line.strip())
+		if p is not None and n > p:
+			i+=1
+		p=n
+print(i)
 
-p=-1
-inc=0
-for d in D:
-	if p > 0 and d > p:
-		inc+=1
-	p=d
-print(inc)
-		
+

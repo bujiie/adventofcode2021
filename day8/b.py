@@ -14,7 +14,68 @@ with open(argv[1]) as fp:
 
 
 # figure out what the segment to letter mapping is...
+for i in I:
+    left,right=i
+    zero,one,two,three,four,five,six,seven,eight,nine=None,None,None,None,None,None,None,None,None,None
+    fives=[]
+    sixes=[]
+    N={}
+    for l in left:
+        ll=len(l)
+        l=''.join(sorted(l))
+        if ll==2:
+            one=l
+        elif ll==3:
+            seven=l
+        elif ll==4:
+            four=l
+        elif ll==7:
+            eight=l
+        elif ll==5:
+            fives.append(l)
+        else:
+            sixes.append(l)
 
+    a=seven
+    for c in one:
+        a=a.replace(c, '') 
+    N['a']=a 
+
+    for num in fives:
+        if one[0] in num and one[1] in num:
+            three=num
+            for seg in num:
+                if seg in four and seg not in one:
+                    N['g']=seg
+                    break 
+
+    a=four
+    for c in one:
+        a=a.replace(c, '')
+    a=a.replace(N['g'], '')
+    N['f']=a
+
+    for num in sixes:
+        if N['g'] not in num:
+            zero=num
+        elif one[0] in num and one[1] in num:
+            nine=num
+        else:
+            six=num
+
+    for num in fives:
+        if num == three:
+            continue
+        elif N['f'] in num:
+            five=num
+        else:
+            two=num
+
+    
+    print(N)
+        
+        
+    
 
 
 

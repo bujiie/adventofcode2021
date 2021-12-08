@@ -13,6 +13,19 @@ with open(argv[1]) as fp:
         I.append((lp,rp))
 
 
+M={
+    'abcdef': 0,
+    'bc': 1,
+    'abdeg': 2,
+    'abcdg': 3,
+    'bcfg': 4,
+    'acdfg': 5,
+    'acdefg': 6,
+    'abc': 7,
+    'abcdefg': 8,
+    'abcdfg': 9
+}
+count=0
 # figure out what the segment to letter mapping is...
 for i in I:
     left,right=i
@@ -71,49 +84,51 @@ for i in I:
         else:
             two=num
 
-    
-    print(N)
-        
-        
-    
+    for seg in five:
+        if seg in [N['g'],N['f'],N['a']]:
+            continue
+        elif seg in one:
+            N['c']=seg
+        else:
+            N['d']=seg
 
+    if one[0]==N['c']:
+        N['b']=one[1]
+    else:
+        N['b']=one[0]
 
+    for seg in two:
+        if seg not in N.values():
+            N['e']=seg
 
-
-# update this map with the mappings
-M={
-    'abcdeg': 0,
-    'acdfgc': 2,
-    'abcdf': 3,
-    'bcdef': 5,
-    'bcdefg': 6,
-    'abcdef': 9
-}
-count=0
-for i in I:
-    _,r=i
+   
+    N_i={v: k for k, v in N.items()} 
     nums=[]
-    for rr in r:
-        l=len(rr)
-        if l==2:
-            nums.append(1)
-        elif l==3:
+    for r in right:
+        rr=len(r) 
+        r=''.join(sorted(r))
+        if rr==2:
+            nums.append(1) 
+        elif rr==3:
             nums.append(7)
-        elif l==4:
+        elif rr==4:
             nums.append(4)
-        elif l==7:
+        elif rr==7:
             nums.append(8)
         else:
-            sorted_rr=''.join(sorted(rr))
-            nums.append(M[sorted_rr])
+            key=""
+            for c in r:
+                key+=N_i[c]
+            key=''.join(sorted(key))
+            nums.append(M[key])
+
     multi=1
     result=0
-    for n in nums:
+    for n in reversed(nums):
         result+=(n*multi)
         multi*=10
     count+=result 
-            
-        
+       
 
 print(count)
             

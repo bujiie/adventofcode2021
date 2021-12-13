@@ -4,6 +4,8 @@ day=$1
 
 challenge_dir="day${1}"
 
+./open_browser $day
+
 mkdir $challenge_dir
 ./get_input.py $day
 mv "in" "${challenge_dir}/in"

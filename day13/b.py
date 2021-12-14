@@ -47,5 +47,5 @@ for y in range(last_folds['y']):
 		if (x,y) in res:
 			print('#', end='')
 		else:
-			print('.', end='')
+			print(' ', end='')
 	print()

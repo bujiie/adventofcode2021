@@ -10,8 +10,7 @@ mkdir $challenge_dir
 ./get_input.py $day
 mv "in" "${challenge_dir}/in"
 
-a_file = "a.py"
-cp __template.py "${challenge_dir}/${a_fiile}"
+cp __template.py "${challenge_dir}/a.py"
 cd $challenge_dir
-chmod 755 $a_file
+chmod 755 a.py
 
